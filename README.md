@@ -29,28 +29,27 @@ A backend service built using **Node.js, TypeScript, Express, Prisma, and Postgr
 
 ## ⚙️ Setup Instructions
 
-###Install dependencies
+Install dependencies
 ```bash
 npm install
 ```
-
-##Configure environment variables
+Configure environment variables
 
 Create a .env file:
 ```bash
 DATABASE_URL="postgresql://postgres:password@localhost:5432/subscription_billing"
 ```
 
-##Run database migrations
+Run database migrations
 ```bash
 npx prisma migrate dev --name init
 ```
 
-##Start the server
+Start the server
 ```bash
 npm run dev
 ```
-##Server runs on:
+Server runs on:
 http://localhost:3000
 
 

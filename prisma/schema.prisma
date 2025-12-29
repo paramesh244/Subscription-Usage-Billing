@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  name          String
+  subscriptions Subscription[]
+  usageRecords  UsageRecord[]
+}
+
+model Plan {
+  id                 Int            @id @default(autoincrement())
+  name               String
+  monthlyQuota       Int
+  extraChargePerUnit Decimal
+  subscriptions      Subscription[]
+}
+
+model Subscription {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  planId    Int
+  startDate DateTime
+  isActive  Boolean
+
+  user User @relation(fields: [userId], references: [id])
+  plan Plan @relation(fields: [planId], references: [id])
+}
+
+model UsageRecord {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  action    String
+  usedUnits Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
